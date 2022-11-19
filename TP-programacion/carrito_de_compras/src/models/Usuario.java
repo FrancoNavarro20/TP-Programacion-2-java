@@ -90,19 +90,27 @@ public class Usuario implements UsuariosService{
 
 	@Override
 	public boolean Login(ListadoUsuarios lu, String username, String password) {
-		// TODO Auto-generated method stub
+		
+		boolean retorno = false;
 		try {
+			System.out.println(username + " " + password);
 			for (Usuario usuario : lu.GetListaUsuarios()) {
-				if(usuario.getNombreUsuario() == username && usuario.getContraseniaUsuario() == password) {
-					return true;
+				if(usuario.getNombreUsuario().toLowerCase().equals(username) && usuario.getContraseniaUsuario().toLowerCase().equals(password)) {
+					System.out.println(usuario.getIdUsuario() + " " + usuario.getContraseniaUsuario());
+					retorno = true;
 				}
-			}
+				else {
+					System.out.println("No se encontro !!");
+					retorno = false;
+				}
+			}			
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println("Ha ocurrido una excepcion en el metodo login.");
-			return false;
+			retorno = false;
 		}
-		return false;		
+		
+		return retorno;		
 	}
 
 	@Override

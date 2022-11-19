@@ -15,7 +15,7 @@ public class MenuArticulo {
 		this.la = la;
 	}
 
-	public void Iniciar()
+	public void IniciarMenuArticulos()
 	{
 		boolean state = true;
 		int contador = 0;;

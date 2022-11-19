@@ -14,7 +14,7 @@ public class ListadoUsuarios implements Contenedor<Usuario> {
 		return this._listUsuarios;
 	}
 
-	
+	/****/
 	public void MostrarListadoUsuario() {
 		System.out.println("Id  |  Nombre  |  Password  |   Rol ");
 		for (Usuario usuario : this._listUsuarios) {

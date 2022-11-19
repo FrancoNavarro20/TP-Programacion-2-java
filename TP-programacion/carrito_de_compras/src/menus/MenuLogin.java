@@ -19,10 +19,10 @@ public class MenuLogin {
 		this.sc = sc;
 	}
 
-	public void InicialMenuLogin()
+	public int InicialMenuLogin()
 	{
 		try {
-			
+			int contador = 0;
 			boolean stateLogin = true;
 			while(stateLogin)
 			{
@@ -35,29 +35,33 @@ public class MenuLogin {
 					String request = sc.next().toUpperCase();
 					if(request.equals("S")) 
 					{
-						Usuario newUsuario = usuarioService.Registrarse(1);
+						Usuario newUsuario = usuarioService.Registrarse(contador+1);
 						if(newUsuario != null)
 						{
 							_listadoUsuario.agregar(newUsuario);
 							_listadoUsuario.MostrarListadoUsuario();
+							contador++;
+							stadoUsuario = IngresoDeDatosLogin();
+							if(stadoUsuario == true)
+							{
+								System.out.println("Ingreso exitoso!!! ingresaste a la aplicación.");
+								stateLogin = false;
+								
+								//Retornamos el rol del usuario
+								return newUsuario.getRolUsuario();
+							}
 						}
 					}
 					else {
 						System.out.println("Ha ocurrido un error al registrarse");
 					}
 				}
-				
-				stadoUsuario = IngresoDeDatosLogin();
-				if(stadoUsuario)
-				{
-					System.out.println("Ingreso exitoso!!! ingresaste a la aplicación.");
-					stateLogin = false;
-				}
 			}
 			
 		} catch (Exception e) {
 			System.out.println("Ha ocurrido un error en el menu login... revisar desarrollador");
 		}
+		return 0;
 		
 	}
 	
