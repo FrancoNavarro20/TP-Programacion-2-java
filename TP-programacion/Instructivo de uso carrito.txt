@@ -1,0 +1,13 @@
+Instructivo de uso del carrito!!
+
+1-Primero ingresar un usario y contraseña, por defecto le va a salir que se registre por si no lo encuentra en el listado
+2-una ves registrado le va a pedir que eliga el rol del usuario 0 para cliente y 1 para empleado
+3-Por defecto registrese como empleado, y agregue los articulos que quiere agregar
+4-Despues si ingrese, registrese con otro usuario como cliente y comiente a agregar los articulos a la lista
+L 
+
+---------------------------------------------
+ADVERTENCIA
+
+POR DEFECTO NO ESTA ANDANDO EL CARRITO, VERIFICANDO LO ESTAMOS TRATANDO DE SOLUCIONARLO PROFE, PERO LO QUE ES EL MENU DE 
+ARTICULOS ANDA PERFECTAMENTE Y EL LOGIN.
