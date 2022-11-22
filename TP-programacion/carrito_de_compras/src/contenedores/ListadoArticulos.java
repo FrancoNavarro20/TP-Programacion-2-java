@@ -22,8 +22,8 @@ public class ListadoArticulos implements Contenedor<Articulo>{
 				System.out.println("ID   -  PRECIO  -  NOMBRE  -  DESCRIPCION");
 				for (Articulo articulo : _listArticulos) 
 				{
-					System.out.println(articulo.getIdArticulo()+ "-      "+articulo.getPrecio()+" - "+ articulo.getNombre()+ " - "+ articulo.getDescripcion());
-				}
+					System.out.println(articulo.getIdArticulo()+ "-      "+articulo.getPrecio()+"    -   "+  articulo.getNombre()+ "      - "+ articulo.getDescripcion());
+				} 
 				retorno = true;
 			}
 			else 

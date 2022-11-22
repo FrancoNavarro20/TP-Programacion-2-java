@@ -18,14 +18,15 @@ public class MenuArticulo {
 	
 	public int IniciarMenuArticulosCliente()
 	{
-		int opcionCliente = OpcionesDeMenuCliente();
 		ListadoArticulos laCliente = new ListadoArticulos();
+		int opcionCliente = -1;
 		boolean state = true;
 		while(state)
 		{
+			opcionCliente = OpcionesDeMenuCliente();
 			switch (opcionCliente) {
 			case 1:
-				laCliente = AgregarArticulosAlCarrito();
+				laCliente = AgregarArticulosAlCarrito(laCliente);
 				break;
 			case 2:
 				if(laCliente.GetListadoArticulos().size() == 0)
@@ -58,60 +59,50 @@ public class MenuArticulo {
 	
 	public void MostrarArticulosDelCarrito(ListadoArticulos la)
 	{
+		System.out.println("-------------------------------LISTA DEL CARRITO------------------------------------");
 		System.out.println("Id  -  Nombre  -  Descripcion  - Precio");
 		for (Articulo articulos : la.GetListadoArticulos()) {
-			System.out.println(articulos.getIdArticulo() + " " + articulos.getNombre() + " " 
-					+ articulos.getDescripcion() + " " + articulos.getPrecio());
+			System.out.println(articulos.getIdArticulo() + "    -   " + articulos.getNombre() + " -   " 
+					+ articulos.getDescripcion() + "       - " + articulos.getPrecio());
 		}
+		System.out.println("------------------------------------------------------------------------------------");
 	}
 	
-	public ListadoArticulos AgregarArticulosAlCarrito()
+	public ListadoArticulos AgregarArticulosAlCarrito(ListadoArticulos laCliente)
 	{
-		ListadoArticulos laCliente = new ListadoArticulos();
+		//ListadoArticulos laCliente = new ListadoArticulos();
 		boolean stateCarrito = true;
 		try {
-			while(stateCarrito)
+			boolean stadoListaArticulo = la.MostrarListadoArticulos();
+			if(stadoListaArticulo)
 			{
-				boolean stadoListaArticulo = la.MostrarListadoArticulos();
-				if(stadoListaArticulo)
-				{
-					System.out.println("Ingrese el nombre del articulo que desea agregar al carrito:");
-					String producto = sc.next();
-					
-					for ( Articulo articulo : la.GetListadoArticulos()) {
-						if(articulo.getNombre().equals(producto))
-						{	
-							laCliente.agregar(articulo);
-							break;
-						}
-						else {
-							System.out.println("No se encontro el articulo, intentelo nuevamente.");
-							break;
-						}
-					}
-					
-					//Segunda parte!!
-					System.out.println("Desea agregar mas cosas al carrito de compras? S/N");
-					String request = sc.next();
-					if(request.toLowerCase().equals("s")) // si esto es igual a true
-					{
-						System.out.println("Entro al if N");
-						stateCarrito = true;
-					}
-					else {
-						stateCarrito = false;
-						break;
-					}
+				stateCarrito = false;
+				System.out.println("Ingrese el ¡¡número!! del articulo que desea agregar al carrito:");
+				int numeroArticulo = sc.nextInt();
+				System.out.println("Producto " + numeroArticulo);
+				Articulo getArticulo = la.GetListadoArticulos().get(numeroArticulo-1);
+				if(getArticulo != null)
+				{	
+					laCliente.agregar(getArticulo);
 				}
 				else {
-					System.out.println("No hay articulos agregados, intentelo nuevamente mas tarde.");
-					stateCarrito = false;
-				}
-				
-				if(stateCarrito == false)
+					System.out.println("No se encontro el articulo, intentelo nuevamente.");
+				}				
+				/*Segunda parte!!
+				System.out.println("Desea agregar mas cosas al carrito de compras? S/N");
+				String request = sc.next();
+				if(request.toLowerCase().equals("s")) // si esto es igual a true
 				{
-					break;
+					System.out.println("Entro al if N");
+					stateCarrito = true;
 				}
+				else {
+					stateCarrito = false;
+				}*/
+			}
+			else {
+				System.out.println("No hay articulos agregados, intentelo nuevamente mas tarde.");
+				stateCarrito = false;
 			}
 			
 		} catch (Exception e) {
@@ -123,6 +114,7 @@ public class MenuArticulo {
 	
 	public void GenerarFacturaDeCompra(ListadoArticulos la)
 	{
+		System.out.println("---------------------FACTURA---------------------------");
 		double total = 0;
 		this.MostrarArticulosDelCarrito(la);
 		
@@ -132,19 +124,21 @@ public class MenuArticulo {
 		}
 		
 		System.out.println("-----------------------------------");
-		System.out.println("Total: " + total);
+		System.out.println("Total: " + total + "\n");
+		System.out.println("-----------------FIN DE LA FACTURA---------------------");
+		
 	}
 	
 	public int IniciarMenuArticulos()
 	{
 		boolean state = true;
-		int contador = 0;;
+		int contador = 1;
 		int opcion;
 		while(state)
 		{
 			opcion = OpcionesDeMenu();
 			state = VerificarOpciones(opcion,contador);
-			contador++;
+			//contador++;
 		}
 		return 5; //Devuelve 5 cuando sale del menu de articulos empleados
 	}
@@ -182,7 +176,8 @@ public class MenuArticulo {
 				break;
 			case 2:
 				
-				Articulo art = CrearArticulo(idContador+1);
+				int cantidad = la.GetListadoArticulos().size();
+				Articulo art = CrearArticulo(cantidad+1);
 				boolean exito = la.agregar(art);
 				
 				if(exito) {System.out.println("El articulo se agrego correctamente.");/*contador++;*/}
